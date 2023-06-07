@@ -1,9 +1,10 @@
 import React from 'react';
+import MainPage from "../pages/mainPage/mainPage";
 
 const App: React.FC = () => {
     return (
         <div>
-            <h1>Hello, React TypeScript App!</h1>
+            <MainPage />
         </div>
     );
 };
