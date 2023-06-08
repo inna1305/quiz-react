@@ -1,7 +1,12 @@
 {
   "compilerOptions": {
+    "allowJs": true,
     "target": "esnext",
-    "lib": ["dom", "esnext", "dom.iterable"],
+    "lib": [
+      "dom",
+      "esnext",
+      "dom.iterable"
+    ],
     "jsx": "react",
     "noEmit": true,
     "module": "esnext",
@@ -13,7 +18,13 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true,
-    "baseUrl": "./src",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@components/*": ["src/components/*"],
+      "@base/*": ["src/base/*"],
+      "@assets/*": ["src/assets/*"]
+    },
     "resolveJsonModule": true,
     "types": [
       "vite/client",

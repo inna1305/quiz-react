@@ -17,6 +17,7 @@ export default defineConfig({
     alias: {
       '@components': resolve(__dirname, 'src/components'),
       '@scss': resolve(__dirname, 'src/scss'),
+      '@base': resolve(__dirname, 'src/base'),
     },
   },
 });
