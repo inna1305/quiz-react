@@ -15,8 +15,8 @@ const MainPage = (): ReactElement => {
           <div className="about__decor_light"></div>
           <div className="about__decor_bottom"></div>
         </div>
-        <Form />
       </div>
+      <Form />
     </div>
   );
 };
