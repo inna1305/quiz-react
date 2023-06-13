@@ -18,6 +18,7 @@ export default defineConfig({
       '@components': resolve(__dirname, 'src/components'),
       '@scss': resolve(__dirname, 'src/scss'),
       '@base': resolve(__dirname, 'src/base'),
+      'types': resolve(__dirname, 'src/types'),
     },
   },
 });

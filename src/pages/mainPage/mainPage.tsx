@@ -1,6 +1,6 @@
 import React from "react";
 import { ReactElement } from "react";
-import Form from "../../components/Form";
+import Form from "@components/form/Form";
 const MainPage = (): ReactElement => {
   return(
     <div className="container">

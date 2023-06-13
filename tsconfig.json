@@ -23,7 +23,8 @@
       "@/*": ["src/*"],
       "@components/*": ["src/components/*"],
       "@base/*": ["src/base/*"],
-      "@assets/*": ["src/assets/*"]
+      "@assets/*": ["src/assets/*"],
+      "types/*": ["src/types/*"]
     },
     "resolveJsonModule": true,
     "types": [
