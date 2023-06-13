@@ -13,3 +13,14 @@ enum Initiator {
   // ['RELATIVE', 'Родственнику'], ['COLLEAGUE', 'Коллеге'],
   // ['CHILD', 'Ребенку'], ['OTHER', 'Другое']]);
 }
+
+export interface ButtonProps {
+  type: ButtonValue,
+  isThereCurrentValue: boolean
+}
+
+export enum ButtonValue {
+  'next' = 'Вперёд >',
+  'prev' = '< Назад',
+  'final' = 'Получить подборку'
+}

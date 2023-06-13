@@ -1,0 +1,157 @@
+.form {
+  background-color: white;
+  border-radius: $border-radius-size;
+  padding: 32px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    position: relative;
+  }
+
+  &__question {
+    margin: 20px 0;
+    position: relative;
+  }
+
+  &__title-counter-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__title {
+    font: 500 16px "OnestMedium";
+  }
+
+  &__counter {
+    color: $placeholder-color;
+    font-size: 14px;
+  }
+}
+
+.fieldset {
+  padding: 0;
+  border: none;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  max-height: 184px;
+
+  &__label {
+    background-color: $input-background-color;
+    border-radius: 16px;
+    border: 1px solid $input-background-color;
+    padding: 18px;
+    min-width: 218px;
+    transition: all 0.1s ease;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__label:hover {
+    background-color: $input-hover-color;
+    cursor: pointer;
+  }
+
+  &__label:active {
+    border: 1px solid $text-color;
+  }
+
+  &__input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+  &__input-text {
+    background-color: $input-background-color;
+    border-radius: 16px;
+    border: 1px solid $input-background-color;
+    padding: 18px;
+    min-width: 93%;
+    transition: all 0.1s ease;
+  }
+
+  &__checkmark {
+    position: relative;
+    display: block;
+    width: 20px;
+    height: 20px;
+    border: 1px solid $input-border-color;
+    border-radius: 50%;
+    margin: 0 10px;
+  }
+
+  &__checkmark::before {
+    content: "";
+    position: absolute;
+    border-radius: 20px;
+    box-sizing: border-box;
+    width: 20px;
+    height: 20px;
+    border: 5px solid $text-color;
+    scale: 0;
+    transition: all 0.1s ease-in;
+  }
+}
+
+.fieldset__input:checked + .fieldset__checkmark::before {
+  scale: 1;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+//select
+
+.select {
+  background-color: #f3f3f3;
+  border: none;
+  border-radius: 15px;
+  font-size: 16px;
+  position: relative;
+  width: 100%;
+
+  & option:checked {
+    background-color: white;
+    border-radius: 15px;
+    border: 1px solid $text-color;
+  }
+}
+
+.fieldset__option {
+  padding: 10px;
+  margin: 15px;
+  position: relative;
+}
+
+.final-popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  font-size: 17px;
+  font-weight: bolder;
+  padding: 50px;
+  border-radius: 10px;
+  z-index: 999;
+  animation: fadeout 1s 3s forwards;
+}
+
+@keyframes fadeout {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
