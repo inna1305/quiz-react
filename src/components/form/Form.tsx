@@ -1,38 +1,59 @@
-import React, { createElement, useState } from "react";
+import React, { useState } from "react";
 import { ReactElement } from "react";
 import { questionsData } from "@base/questions-data";
 import RadioSet from "@components/RadioSet";
+import SelectSet from "@components/SelectSet";
+import { AnswerRecord, ButtonValue } from "types/types";
+import Button from "@components/button/Button";
 
-interface AnswerRecord {
-  name: string,
-  value: string | string[],
-  id: number,
-}
-
-const Form = (): ReactElement => {//передается текущий объект вопроса
+const Form = (): ReactElement => {
   const [step, setStep] = useState(1);
-  const doNextStep = function() {
-    setStep(a => a + 1);
-  }
+  //шаг меняется при нажатии на кнопку вперед либо при нажатии на радиокнопку
+
   const [answers, setAnswers] = useState<AnswerRecord[]>([]);
 
-  // const handleButton = () => {
-  //   setAnswers(prevState => )
-  // }
+  //export type ButtonClickHandler<T> = (event: React.MouseEvent<HTMLButtonElement>, data: T) => void;
 
-  const questions = questionsData;
+  const handleChange = (value: AnswerRecord) => {
+    setAnswers([...answers, value]);
+    doNextStep();
+  };
+
+  const doNextStep = function() {
+    setStep(a => a + 1);
+  };
+
+  const currentQuestion = questionsData[step - 1];
+
   return (
-    <div className="form">{
-      questions.map(question => {
-        if (question.answerType === "radio") {
-          return <RadioSet{...question} key={question.id}></RadioSet>;
-        } else {
-          return null;
-        }
-      })
-    }
+    <div className="form">
+      <div className="form__container">
+        <div className="form__title-counter-container">
+          <h2 className="form__title">{currentQuestion.question}</h2>
+          <div className="form__counter">Шаг {step}/{questionsData.length + 1}</div>
+        </div>
+        <div className="form__question">
+          <fieldset className="fieldset">
+            {
+              currentQuestion.answerType === "radio" ? (
+              <RadioSet question={currentQuestion} changeCallback={handleChange} key={currentQuestion.id} />
+            ) : currentQuestion.answerType === "select" ? (
+              <SelectSet question={currentQuestion} changeCallback={handleChange} key={currentQuestion.id} />
+            ) : null
+            }
+          </fieldset>
+        </div>
+        <div className="buttons">
+          <Button type={ButtonValue.prev} isThereCurrentValue={true} buttonHandler={() => {
+            setAnswers([...answers]);
+          }} />
+          <Button type={ButtonValue.next} isThereCurrentValue={true} buttonHandler={() => {
+          }
+          } />
+        </div>
+      </div>
     </div>
-  )
+  );
 };
 
 export default Form;
