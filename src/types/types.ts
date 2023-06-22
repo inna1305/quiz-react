@@ -30,7 +30,7 @@ export interface AnswerRecord {
 
 export interface SetProps {
   question: Question,
-  changeCallback: ButtonClickHandler<any>
+  changeCallback: ButtonClickHandler<AnswerRecord>
 }
 
 export type ButtonClickHandler<T> = (data: T) => void;

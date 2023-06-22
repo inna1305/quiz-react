@@ -10,17 +10,18 @@ const Form = (): ReactElement => {
   const [step, setStep] = useState(1);
   //шаг меняется при нажатии на кнопку вперед либо при нажатии на радиокнопку
 
-  const [answers, setAnswers] = useState<AnswerRecord[]>([]);
+  const [answersMap, setAnswersMap] = useState<Map<string, AnswerRecord>>(new Map<string, AnswerRecord>());
 
   //export type ButtonClickHandler<T> = (event: React.MouseEvent<HTMLButtonElement>, data: T) => void;
 
   const handleChange = (value: AnswerRecord) => {
-    setAnswers([...answers, value]);
+    setAnswersMap(answersMap.set(value.name, value));
     doNextStep();
   };
 
   const doNextStep = function() {
     setStep(a => a + 1);
+    console.log(step);
   };
 
   const currentQuestion = questionsData[step - 1];
@@ -44,9 +45,7 @@ const Form = (): ReactElement => {
           </fieldset>
         </div>
         <div className="buttons">
-          <Button type={ButtonValue.prev} isThereCurrentValue={true} buttonHandler={() => {
-            setAnswers([...answers]);
-          }} />
+          <Button type={ButtonValue.prev} isThereCurrentValue={true} buttonHandler={() => {} }/>
           <Button type={ButtonValue.next} isThereCurrentValue={true} buttonHandler={() => {
           }
           } />
