@@ -12,8 +12,6 @@ const Form = (): ReactElement => {
 
   const [answersMap, setAnswersMap] = useState<Map<string, AnswerRecord>>(new Map<string, AnswerRecord>());
 
-  //export type ButtonClickHandler<T> = (event: React.MouseEvent<HTMLButtonElement>, data: T) => void;
-
   const handleChange = (value: AnswerRecord) => {
     setAnswersMap(answersMap.set(value.name, value));
     doNextStep();
@@ -34,21 +32,19 @@ const Form = (): ReactElement => {
           <div className="form__counter">Шаг {step}/{questionsData.length + 1}</div>
         </div>
         <div className="form__question">
-          <fieldset className="fieldset">
             {
               currentQuestion.answerType === "radio" ? (
-              <RadioSet question={currentQuestion} changeCallback={handleChange} key={currentQuestion.id} />
+              <RadioSet question={currentQuestion}
+                        changeCallback={handleChange}
+                        key={currentQuestion.id}
+                        value={answersMap.get(currentQuestion.name)?.value}/>
             ) : currentQuestion.answerType === "select" ? (
-              <SelectSet question={currentQuestion} changeCallback={handleChange} key={currentQuestion.id} />
+              <SelectSet question={currentQuestion}
+                         changeCallback={handleChange}
+                         key={currentQuestion.id}
+                         value={answersMap.get(currentQuestion.name)?.value}/>
             ) : null
             }
-          </fieldset>
-        </div>
-        <div className="buttons">
-          <Button type={ButtonValue.prev} isThereCurrentValue={true} buttonHandler={() => {} }/>
-          <Button type={ButtonValue.next} isThereCurrentValue={true} buttonHandler={() => {
-          }
-          } />
         </div>
       </div>
     </div>
