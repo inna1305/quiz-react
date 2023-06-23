@@ -17,6 +17,9 @@
   &__question {
     margin: 20px 0;
     position: relative;
+    display: flex;
+    flex-direction: column;
+
   }
 
   &__title-counter-container {
@@ -43,6 +46,10 @@
   gap: 8px;
   flex-wrap: wrap;
   max-height: 215px;
+
+  &_select {
+    flex-direction: row;
+  }
 
   &__label {
     background-color: $input-background-color;

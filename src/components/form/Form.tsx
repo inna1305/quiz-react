@@ -3,8 +3,7 @@ import { ReactElement } from "react";
 import { questionsData } from "@base/questions-data";
 import RadioSet from "@components/RadioSet";
 import SelectSet from "@components/SelectSet";
-import { AnswerRecord, ButtonValue } from "types/types";
-import Button from "@components/button/Button";
+import { AnswerRecord } from "types/types";
 
 const Form = (): ReactElement => {
   const [step, setStep] = useState(1);
@@ -16,6 +15,8 @@ const Form = (): ReactElement => {
     setAnswersMap(answersMap.set(value.name, value));
     doNextStep();
   };
+
+
 
   const doNextStep = function() {
     setStep(a => a + 1);

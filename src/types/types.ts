@@ -13,7 +13,7 @@ export type answerType = "radio" | "select";
 export interface ButtonProps {
   type: ButtonValue,
   isThereCurrentValue: boolean,
-  buttonHandler: ButtonClickHandler<string>
+  buttonHandler: RadioSubmitHandler<any>
 }
 
 export enum ButtonValue {
@@ -30,10 +30,19 @@ export interface AnswerRecord {
 
 export interface SetProps {
   question: Question,
-  changeCallback: ButtonClickHandler<AnswerRecord>
+  value: string | string[] | undefined,
 }
 
-export type ButtonClickHandler<T> = (data: T) => void;
+export interface SelectProps extends SetProps {
+  changeCallback: SelectSubmitHandler<AnswerRecord>
+}
+
+export interface RadioProps extends SetProps {
+  changeCallback: RadioSubmitHandler<AnswerRecord>
+}
+
+export type RadioSubmitHandler<T> = (data: T) => void;
+export type SelectSubmitHandler<T> = (data: T) => void;
 
 export interface IRequestBody {
   initiator: string,
