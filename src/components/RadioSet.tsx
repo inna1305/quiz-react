@@ -1,8 +1,8 @@
 import React, { ReactElement } from "react";
-import { AnswerRecord, ButtonValue, RadioProps, SetProps } from "types/types";
+import { AnswerRecord, ButtonValue, QuestionElementProps } from "types/types";
 import Button from "@components/button/Button";
 
-const RadioSet = (props: RadioProps): ReactElement => {
+const RadioSet = (props: QuestionElementProps): ReactElement => {
 
   const variants = Array.from(props.question.variants.keys());
   const arrVariantsElem = variants.map((variant, index) => (
@@ -17,7 +17,7 @@ const RadioSet = (props: RadioProps): ReactElement => {
                const answer: AnswerRecord = {
                  name: props.question.name,
                  value: variant,
-                 id: variant
+                 id: String(props.question.id)
                };
                props.changeCallback(answer);
              }}></input>
@@ -37,7 +37,6 @@ const RadioSet = (props: RadioProps): ReactElement => {
         <Button type={ButtonValue.prev} isThereCurrentValue={true} buttonHandler={() => {
         }} />
         <Button type={ButtonValue.next} isThereCurrentValue={true} buttonHandler={() => {
-          //todo перемещены кнопки внутрь вопроса, проверить работу записи значения и перехода
 
         }
         } />

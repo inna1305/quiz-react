@@ -7,7 +7,6 @@ import { AnswerRecord } from "types/types";
 
 const Form = (): ReactElement => {
   const [step, setStep] = useState(1);
-  //шаг меняется при нажатии на кнопку вперед либо при нажатии на радиокнопку
 
   const [answersMap, setAnswersMap] = useState<Map<string, AnswerRecord>>(new Map<string, AnswerRecord>());
 

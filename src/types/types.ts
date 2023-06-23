@@ -7,13 +7,14 @@ export interface Question {
   variants: Map<string, string>,
   id: number,
 }
-
+export type QuestionSubmitHandler<T> = (data: T) => void;
+export type ButtonHandler = () => void;
 export type answerType = "radio" | "select";
 
 export interface ButtonProps {
   type: ButtonValue,
   isThereCurrentValue: boolean,
-  buttonHandler: RadioSubmitHandler<any>
+  buttonHandler: ButtonHandler,
 }
 
 export enum ButtonValue {
@@ -28,21 +29,11 @@ export interface AnswerRecord {
   id: string,
 }
 
-export interface SetProps {
+export interface QuestionElementProps {
   question: Question,
   value: string | string[] | undefined,
+  changeCallback: QuestionSubmitHandler<AnswerRecord>
 }
-
-export interface SelectProps extends SetProps {
-  changeCallback: SelectSubmitHandler<AnswerRecord>
-}
-
-export interface RadioProps extends SetProps {
-  changeCallback: RadioSubmitHandler<AnswerRecord>
-}
-
-export type RadioSubmitHandler<T> = (data: T) => void;
-export type SelectSubmitHandler<T> = (data: T) => void;
 
 export interface IRequestBody {
   initiator: string,
