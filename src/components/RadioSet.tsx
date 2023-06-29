@@ -1,8 +1,8 @@
 import React, { ReactElement } from "react";
-import { AnswerRecord, ButtonValue, QuestionElementProps } from "types/types";
+import { AnswerRecord, ButtonValue, QuestionElementProps, RadioProps } from "types/types";
 import Button from "@components/button/Button";
 
-const RadioSet = (props: QuestionElementProps): ReactElement => {
+const RadioSet = (props: RadioProps): ReactElement => {
 
   const variants = Array.from(props.question.variants.keys());
   const arrVariantsElem = variants.map((variant, index) => (
@@ -17,7 +17,7 @@ const RadioSet = (props: QuestionElementProps): ReactElement => {
                const answer: AnswerRecord = {
                  name: props.question.name,
                  value: variant,
-                 id: String(props.question.id)
+                 id: props.question.id
                };
                props.changeCallback(answer);
              }}></input>
@@ -25,23 +25,10 @@ const RadioSet = (props: QuestionElementProps): ReactElement => {
     </label>
   ));
 
-  //от чего зависит кнопка далее и назад
-  //можно ли сделать одинаковые хэндлеры для радио и селект кнопок или одного типа
-  // (назад и вперед) для разных типов вопроса
-
-  return (<>
-      <fieldset className="fieldset">
-        {arrVariantsElem}
-      </fieldset>
-      <div className="buttons">
-        <Button type={ButtonValue.prev} isThereCurrentValue={true} buttonHandler={() => {
-        }} />
-        <Button type={ButtonValue.next} isThereCurrentValue={true} buttonHandler={() => {
-
-        }
-        } />
-      </div>
-    </>
+  return (
+    <fieldset className="fieldset">
+      {arrVariantsElem}
+    </fieldset>
   )
     ;
 };

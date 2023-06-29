@@ -1,13 +1,10 @@
 import React, { ReactElement, useState } from "react";
-import { AnswerRecord, ButtonValue, QuestionElementProps } from "types/types";
-import Button from "@components/button/Button";
+import { SelectProps } from "types/types";
 
-const SelectSet = (props: QuestionElementProps): ReactElement => {
-  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
-
+const SelectSet = (props: SelectProps): ReactElement => {
   const handleOptionsChoosing = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedValues = Array.from(event?.target?.selectedOptions, (option) => option.value);
-    setSelectedOptions(selectedValues);
+    const selectedValues = Array.from(event.target.selectedOptions, (option) => option.value);
+    props.changeCallback(selectedValues);
   };
 
   const variants = Array.from(props.question.variants.values());
@@ -27,18 +24,6 @@ const SelectSet = (props: QuestionElementProps): ReactElement => {
           {arrVariantsElem}
         </select>
       </fieldset>
-      <div className="buttons">
-        <Button type={ButtonValue.prev} isThereCurrentValue={true} buttonHandler={() => {
-        }} />
-        <Button type={ButtonValue.next} isThereCurrentValue={true} buttonHandler={() => {
-          const answer: AnswerRecord = {
-            name: props.question.name,
-            value: selectedOptions,
-            id: String(props.question.id)
-          };
-          props.changeCallback(answer);
-        }} />
-      </div>
     </>
   );
 };

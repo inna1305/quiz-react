@@ -8,6 +8,7 @@ export interface Question {
   id: number,
 }
 export type QuestionSubmitHandler<T> = (data: T) => void;
+export type SelectChooseHandler<T> = (data: T) => void;
 export type ButtonHandler = () => void;
 export type answerType = "radio" | "select";
 
@@ -26,14 +27,23 @@ export enum ButtonValue {
 export interface AnswerRecord {
   name: string,
   value: string | string[],
-  id: string,
+  id: number,
 }
 
 export interface QuestionElementProps {
   question: Question,
   value: string | string[] | undefined,
+}
+
+export interface RadioProps extends QuestionElementProps{
   changeCallback: QuestionSubmitHandler<AnswerRecord>
 }
+
+export interface SelectProps extends QuestionElementProps {
+  handleSubmit: QuestionSubmitHandler<AnswerRecord>,
+  changeCallback: SelectChooseHandler<string[]>
+}
+
 
 export interface IRequestBody {
   initiator: string,
