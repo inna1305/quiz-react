@@ -61,7 +61,7 @@ const Form = (): ReactElement => {
             }
             <div className="buttons">
               <Button type={ButtonValue.prev} isThereCurrentValue={step > 1} buttonHandler={() => {
-                //todo кнопка активна если заполнены ответы и шаг не 1
+                setStep(prev => prev - 1);
               }} />
               <Button type={ButtonValue.next} isThereCurrentValue={true} buttonHandler={submitSelectedOptions} />
             </div>

@@ -10,8 +10,8 @@ const RadioSet = (props: RadioProps): ReactElement => {
       <input className="fieldset__input"
              id={variant}
              type="radio"
-             value={variant}
-             checked={props.value !== undefined}
+             value={props.value}
+             checked={props.value !== undefined && props.value === variant}
              name="variant"
              onChange={() => {
                const answer = getAnswerRecord(props.question.name, variant, props.question.id)
