@@ -6,6 +6,7 @@ import SelectSet from "@components/SelectSet";
 import { AnswerRecord, ButtonValue } from "types/types";
 import Button from "@components/button/Button";
 import ContactForm from "@components/ContactForm";
+import { getAnswerRecord } from "@components/form/functions/getAnswerRecord";
 
 const Form = (): ReactElement => {
   //todo перенести функции колбэки в useCallback
@@ -29,17 +30,13 @@ const Form = (): ReactElement => {
   };
 
   const submitSelectedOptions = () => {
-    const answer = {
-      name: currentQuestion.name,
-      value: selectedOptions,
-      id: currentQuestion.id
-    };
+    const answer = getAnswerRecord(currentQuestion.name, selectedOptions, currentQuestion.id);
     setAnswersMap(answersMap.set(answer.id, answer));
     setStep(a => a + 1);
   };
 
   if (step === questionsData.length + 1) {
-    return <ContactForm />;
+    return <ContactForm />
   } else {
     return (
       <div className="form">

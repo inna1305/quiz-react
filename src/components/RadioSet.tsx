@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
-import { AnswerRecord, ButtonValue, QuestionElementProps, RadioProps } from "types/types";
-import Button from "@components/button/Button";
+import { RadioProps } from "types/types";
+import { getAnswerRecord } from "@components/form/functions/getAnswerRecord";
 
 const RadioSet = (props: RadioProps): ReactElement => {
 
@@ -14,11 +14,7 @@ const RadioSet = (props: RadioProps): ReactElement => {
              checked={props.value !== undefined}
              name="variant"
              onChange={() => {
-               const answer: AnswerRecord = {
-                 name: props.question.name,
-                 value: variant,
-                 id: props.question.id
-               };
+               const answer = getAnswerRecord(props.question.name, variant, props.question.id)
                props.changeCallback(answer);
              }}></input>
       <span className="fieldset__checkmark"></span>
