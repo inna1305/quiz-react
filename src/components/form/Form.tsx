@@ -36,7 +36,7 @@ const Form = (): ReactElement => {
   };
 
   if (step === questionsData.length + 1) {
-    return <ContactForm />
+    return <ContactForm />;
   } else {
     return (
       <div className="form">
