@@ -40,7 +40,6 @@ export interface RadioProps extends QuestionElementProps{
 }
 
 export interface SelectProps extends QuestionElementProps {
-  handleSubmit: QuestionSubmitHandler<AnswerRecord>,
   changeCallback: SelectChooseHandler<string[]>
 }
 

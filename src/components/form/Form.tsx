@@ -14,13 +14,6 @@ const Form = (): ReactElement => {
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const [answersMap, setAnswersMap] = useState<Map<number, AnswerRecord>>(new Map<number, AnswerRecord>());
 
-  const getAnswer = (): AnswerRecord => {
-    return {
-      name: currentQuestion.name,
-      value: selectedOptions,
-      id: currentQuestion.id
-    };
-  };
   const currentQuestion = questionsData[step - 1];
 
   const handleRadioChange = (value: AnswerRecord) => {
@@ -32,7 +25,17 @@ const Form = (): ReactElement => {
     setSelectedOptions(value);
     //todo setButtonState(step, );??
     //если значение уже заполнено, состояние кнопок не менять
-  }
+  };
+
+  const submitSelectedOptions = () => {
+    const answer = {
+      name: currentQuestion.name,
+      value: selectedOptions,
+      id: currentQuestion.id
+    };
+    setAnswersMap(answersMap.set(answer.id, answer));
+    setStep(a => a + 1);
+  };
 
   return (
     <div className="form">
@@ -52,17 +55,14 @@ const Form = (): ReactElement => {
               <SelectSet question={currentQuestion}
                          changeCallback={handleSelectChange}
                          key={currentQuestion.id}
-                         value={answersMap.get(currentQuestion.id)?.value}
-                         handleSubmit={getAnswer}/>
+                         value={answersMap.get(currentQuestion.id)?.value} />
             ) : null
           }
           <div className="buttons">
             <Button type={ButtonValue.prev} isThereCurrentValue={step > 1} buttonHandler={() => {
               //todo кнопка активна если заполнены ответы и шаг не 1
             }} />
-            <Button type={ButtonValue.next} isThereCurrentValue={true} buttonHandler={() => {
-              console.log(selectedOptions);
-            }} />
+            <Button type={ButtonValue.next} isThereCurrentValue={true} buttonHandler={submitSelectedOptions} />
           </div>
         </div>
       </div>
