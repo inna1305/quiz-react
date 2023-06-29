@@ -5,6 +5,7 @@ import RadioSet from "@components/RadioSet";
 import SelectSet from "@components/SelectSet";
 import { AnswerRecord, ButtonValue } from "types/types";
 import Button from "@components/button/Button";
+import ContactForm from "@components/ContactForm";
 
 const Form = (): ReactElement => {
   //todo перенести функции колбэки в useCallback
@@ -37,37 +38,42 @@ const Form = (): ReactElement => {
     setStep(a => a + 1);
   };
 
-  return (
-    <div className="form">
-      <div className="form__container">
-        <div className="form__title-counter-container">
-          <h2 className="form__title">{currentQuestion.question}</h2>
-          <div className="form__counter">Шаг {step}/{questionsData.length + 1}</div>
-        </div>
-        <div className="form__question">
-          {
-            currentQuestion.answerType === "radio" ? (
-              <RadioSet question={currentQuestion}
-                        changeCallback={handleRadioChange}
-                        key={currentQuestion.id}
-                        value={answersMap.get(currentQuestion.id)?.value} />
-            ) : currentQuestion.answerType === "select" ? (
-              <SelectSet question={currentQuestion}
-                         changeCallback={handleSelectChange}
-                         key={currentQuestion.id}
-                         value={answersMap.get(currentQuestion.id)?.value} />
-            ) : null
-          }
-          <div className="buttons">
-            <Button type={ButtonValue.prev} isThereCurrentValue={step > 1} buttonHandler={() => {
-              //todo кнопка активна если заполнены ответы и шаг не 1
-            }} />
-            <Button type={ButtonValue.next} isThereCurrentValue={true} buttonHandler={submitSelectedOptions} />
+  if (step === questionsData.length + 1) {
+    return <ContactForm />;
+  } else {
+    return (
+      <div className="form">
+        <div className="form__container">
+          <div className="form__title-counter-container">
+            <h2 className="form__title">{currentQuestion.question}</h2>
+            <div className="form__counter">Шаг {step}/{questionsData.length + 1}</div>
+          </div>
+          <div className="form__question">
+            {
+              currentQuestion.answerType === "radio" ? (
+                <RadioSet question={currentQuestion}
+                          changeCallback={handleRadioChange}
+                          key={currentQuestion.id}
+                          value={answersMap.get(currentQuestion.id)?.value} />
+              ) : currentQuestion.answerType === "select" ? (
+                <SelectSet question={currentQuestion}
+                           changeCallback={handleSelectChange}
+                           key={currentQuestion.id}
+                           value={answersMap.get(currentQuestion.id)?.value} />
+              ) : null
+            }
+            <div className="buttons">
+              <Button type={ButtonValue.prev} isThereCurrentValue={step > 1} buttonHandler={() => {
+                //todo кнопка активна если заполнены ответы и шаг не 1
+              }} />
+              <Button type={ButtonValue.next} isThereCurrentValue={true} buttonHandler={submitSelectedOptions} />
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
+  ;
 };
 
 export default Form;
