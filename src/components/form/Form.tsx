@@ -37,11 +37,12 @@ const Form = (): ReactElement => {
     setAnswer(answersObj.set(currentQuestion.name, value));
   };
 
-  const value = answersObj.get(currentQuestion.name);
 
   if (step === questionsData.length + 1) {
     return <ContactForm />;
   } else {
+    const value = answersObj.get(currentQuestion.name);
+
     return (
       <div className="form">
         <div className="form__container">
@@ -55,7 +56,7 @@ const Form = (): ReactElement => {
                 <RadioSet question={currentQuestion}
                           changeCallback={handleRadioChange}
                           key={currentQuestion.id}
-                          value={value || ""} />
+                          value={value || undefined} />
               ) : currentQuestion.answerType === "select" ? (
                 <SelectSet question={currentQuestion}
                            changeCallback={handleSelectChange}
@@ -68,7 +69,7 @@ const Form = (): ReactElement => {
                 setStep(prev => prev - 1);
               }} />
               <Button isActive={value !== undefined} innerText={ButtonValue.next} buttonHandler={() => {
-                setStep(prev => prev + 1);
+                setStep(a => a + 1);
               }} />
             </div>
           </div>
