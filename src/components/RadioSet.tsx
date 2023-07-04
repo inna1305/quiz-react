@@ -6,8 +6,6 @@ const RadioSet = (props: RadioProps): ReactElement => {
 
   const variants = Array.from(props.question.variants.keys());
 
-  const oldValue = props.value;
-
   const arrVariantsElem = variants.map((variant, index) => (
     <label htmlFor={variant} key={index} className="fieldset__label">{props.question.variants.get(variant)}
       <input className="fieldset__input"

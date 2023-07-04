@@ -21,7 +21,7 @@ const Form = (): ReactElement => {
     [questionNames.howManyToAdmission, null],
     [questionNames.name, null],
     [questionNames.phone, null],
-    [questionNames.email, null],
+    [questionNames.email, null]
   ]));
 
   const [step, setStep] = useState(1);
@@ -55,7 +55,7 @@ const Form = (): ReactElement => {
                 <RadioSet question={currentQuestion}
                           changeCallback={handleRadioChange}
                           key={currentQuestion.id}
-                          value={value || ''} />
+                          value={value || ""} />
               ) : currentQuestion.answerType === "select" ? (
                 <SelectSet question={currentQuestion}
                            changeCallback={handleSelectChange}
@@ -75,7 +75,8 @@ const Form = (): ReactElement => {
         </div>
       </div>
     );
-  };
+  }
+  ;
 };
 
 export default Form;
