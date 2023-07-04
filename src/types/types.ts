@@ -24,17 +24,12 @@ export interface Question {
 }
 export type QuestionSubmitHandler<T> = (data: T) => void;
 export type SelectChooseHandler<T> = (data: T) => void;
-export type PrevButtonHandler = () => void;
-export type NextButtonHandler<D> = (data2: D) => void;
+export type ButtonHandler = () => void;
 export type answerType = "radio" | "select";
 
-export interface PrevButtonProps {
-  currentStep: number,
-  buttonHandler: PrevButtonHandler
-}
-
-export interface NextButtonProps {
-  buttonHandler: NextButtonHandler<string[]>,
+export interface ButtonProps {
+  innerText: ButtonValue,
+  buttonHandler: ButtonHandler,
   isActive: boolean
 }
 

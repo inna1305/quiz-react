@@ -2,10 +2,9 @@ import React, { ReactElement, useState } from "react";
 import { questionsData } from "@base/questions-data";
 import RadioSet from "@components/RadioSet";
 import SelectSet from "@components/SelectSet";
-import { answerType, questionNames } from "types/types";
+import { ButtonValue, questionNames } from "types/types";
 import ContactForm from "@components/ContactForm";
-import PrevButton from "@components/buttons/PrevButton";
-import NextButton from "@components/buttons/NextButton";
+import Button from "@components/buttons/Button";
 
 const Form = (): ReactElement => {
   //todo перенести функции колбэки в useCallback
@@ -38,10 +37,6 @@ const Form = (): ReactElement => {
     setAnswer(answersObj.set(currentQuestion.name, value));
   };
 
-  const handleNextStep = () => {
-    setStep(a => a + 1);
-  };
-
   const value = answersObj.get(currentQuestion.name);
 
   if (step === questionsData.length + 1) {
@@ -69,10 +64,12 @@ const Form = (): ReactElement => {
               ) : null
             }
             <div className="buttons">
-              <PrevButton currentStep={step} buttonHandler={() => {
+              <Button isActive={step > 1} innerText={ButtonValue.prev} buttonHandler={() => {
                 setStep(prev => prev - 1);
               }} />
-              <NextButton isActive={value !== undefined} buttonHandler={handleNextStep} />
+              <Button isActive={value !== undefined} innerText={ButtonValue.next} buttonHandler={() => {
+                setStep(prev => prev + 1);
+              }} />
             </div>
           </div>
         </div>
