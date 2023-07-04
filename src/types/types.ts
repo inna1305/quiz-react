@@ -1,21 +1,41 @@
 import { LearningForm } from "types/questionsTypes";
 
+export enum questionNames {
+  'initiator'= 'initiator',
+  'cities' = 'cities',
+  'currentEducation' = 'currentEducation',
+  'educationTargetType' = 'educationTargetType',
+  'learningForm' = 'learningForm',
+  'paidEducationAllowedType' = 'paidEducationAllowedType',
+  'educationSpecialityType' = 'educationSpecialityType',
+  'howManyToAdmission' = 'howManyToAdmission',
+  'name' = 'name',
+  'phone' = 'phone',
+  'email' = 'email',
+}
+
+
 export interface Question {
   question: string,
-  name: string,
+  name: questionNames,
   answerType: answerType,
   variants: Map<string, string>,
   id: number,
 }
 export type QuestionSubmitHandler<T> = (data: T) => void;
 export type SelectChooseHandler<T> = (data: T) => void;
-export type ButtonHandler = () => void;
+export type PrevButtonHandler = () => void;
+export type NextButtonHandler<D> = (data2: D) => void;
 export type answerType = "radio" | "select";
 
-export interface ButtonProps {
-  type: ButtonValue,
-  isThereCurrentValue: boolean,
-  buttonHandler: ButtonHandler,
+export interface PrevButtonProps {
+  currentStep: number,
+  buttonHandler: PrevButtonHandler
+}
+
+export interface NextButtonProps {
+  buttonHandler: NextButtonHandler<string[]>,
+  isActive: boolean
 }
 
 export enum ButtonValue {
@@ -24,19 +44,13 @@ export enum ButtonValue {
   "final" = "Получить подборку"
 }
 
-export interface AnswerRecord {
-  name: string,
-  value: string | string[],
-  id: number,
-}
-
 export interface QuestionElementProps {
   question: Question,
-  value: string | string[] | undefined,
+  value: string | string[] | undefined
 }
 
 export interface RadioProps extends QuestionElementProps{
-  changeCallback: QuestionSubmitHandler<AnswerRecord>
+  changeCallback: QuestionSubmitHandler<string>
 }
 
 export interface SelectProps extends QuestionElementProps {
@@ -45,15 +59,17 @@ export interface SelectProps extends QuestionElementProps {
 
 
 export interface IRequestBody {
-  initiator: string,
-  cities: string[],
-  currentEducation: string,
-  educationTargetType: string,
-  learningForm: LearningForm,
-  paidEducationAllowedType: string,
-  educationSpecialityType: string[],
-  howManyToAdmission: string,
-  name: string,
-  phone: string,
-  email: string
+  initiator: string | null,
+  cities: string[] | null,
+  currentEducation: string | null,
+  educationTargetType: string | null,
+  learningForm: LearningForm | null,
+  paidEducationAllowedType: string | null,
+  educationSpecialityType: string[] | null,
+  howManyToAdmission: string | null,
+  name: string | null,
+  phone: string | null,
+  email: string | null
 }
+
+

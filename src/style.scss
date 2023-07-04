@@ -1,7 +1,7 @@
 @import "base/normalize.css";
 @import "base/variables";
 @import "pages/mainPage/mainPage";
-@import "components/button/button";
+@import "components/buttons/button";
 @import "components/form/form";
 
 
@@ -26,4 +26,8 @@ h1, h2 {
 
 p {
   margin: 0;
+}
+
+button:hover {
+  cursor: pointer;
 }

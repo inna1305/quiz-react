@@ -1,14 +1,21 @@
 import {
-  Question
-} from "@/types/types";
-import {
   City,
   EducationDescription,
-  EducationLevel, EducationSpecialityDescription, EducationSpecialityType, EducationTargetDescription,
-  EducationTargetType, HowManyToAdmission, HowManyToAdmissionDescription,
+  EducationLevel,
+  EducationSpecialityDescription,
+  EducationSpecialityType,
+  EducationTargetDescription,
+  EducationTargetType,
+  HowManyToAdmission,
+  HowManyToAdmissionDescription,
   InitiatorKey,
-  InitiatorValue, LearningForm, LearningFormDescription, PaidEducationAllowedDescription, PaidEducationAllowedType
+  InitiatorValue,
+  LearningForm,
+  LearningFormDescription,
+  PaidEducationAllowedDescription,
+  PaidEducationAllowedType
 } from "types/questionsTypes";
+import { Question, questionNames } from "types/types";
 
 const initiatorMap: Map<InitiatorKey, InitiatorValue> = new Map([
   ["YOURSELF", "Себе"],
@@ -72,56 +79,56 @@ const educationSpecialityTypeMap: Map<EducationSpecialityType, EducationSpeciali
 export const questionsData: Question[] = [
     {
       question: "Для кого вы ищете учебное заведение?",
-      name: "initiator",
+      name: questionNames.initiator,
       answerType: "radio",
       variants: initiatorMap,
       id: 1,
     },
   {
     question: "В каком городе планируете поступать?",
-    name: "cities",
+    name: questionNames.cities,
     answerType: "select",
     variants: citiesMap,
     id: 2,
   },
   {
     question: "Какое образование уже есть?",
-    name: "currentEducation",
+    name: questionNames.currentEducation,
     answerType: "radio",
     variants: currentEducationMap,
     id: 3,
   },
   {
     question: "Куда планируете поступать?",
-    name: "educationTargetType",
+    name: questionNames.educationTargetType,
     answerType: "radio",
     variants: educationTargetTypeMap,
     id: 4,
   },
   {
     question: "Какую форму обучения предпочитаете?",
-    name: "learningForm",
+    name: questionNames.learningForm,
     answerType: "radio",
     variants: learningFormMap,
     id: 5
   },
   {
     question: "Рассматриваете платное обучение?",
-    name: "paidEducationAllowedType",
+    name: questionNames.paidEducationAllowedType,
     answerType: "radio",
     variants: paidEducationAllowedTypeMap,
     id: 6
   },
   {
     question: "Какая специальность интересует?",
-    name: "educationSpecialityType",
+    name: questionNames.educationSpecialityType,
     answerType: "select",
     variants: educationSpecialityTypeMap,
     id: 7
   },
   {
     question: "Как скоро планируете поступать?",
-    name: "howManyToAdmission",
+    name: questionNames.howManyToAdmission,
     answerType: "radio",
     variants: howManyToAdmissionMap,
     id: 8

@@ -1,10 +1,13 @@
 import React, { ReactElement } from "react";
 import { RadioProps } from "types/types";
-import { getAnswerRecord } from "@components/form/functions/getAnswerRecord";
 
 const RadioSet = (props: RadioProps): ReactElement => {
+  //todo если нажать на нажатую пупку она тогглится при перезаходе(теряет значение) - проверено только наглядно
 
   const variants = Array.from(props.question.variants.keys());
+
+  const oldValue = props.value;
+
   const arrVariantsElem = variants.map((variant, index) => (
     <label htmlFor={variant} key={index} className="fieldset__label">{props.question.variants.get(variant)}
       <input className="fieldset__input"
@@ -14,8 +17,7 @@ const RadioSet = (props: RadioProps): ReactElement => {
              checked={props.value !== undefined && props.value === variant}
              name="variant"
              onChange={() => {
-               const answer = getAnswerRecord(props.question.name, variant, props.question.id)
-               props.changeCallback(answer);
+               props.changeCallback(variant);
              }}></input>
       <span className="fieldset__checkmark"></span>
     </label>

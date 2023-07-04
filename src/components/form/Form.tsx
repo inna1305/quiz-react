@@ -1,39 +1,48 @@
-import React, { useState } from "react";
-import { ReactElement } from "react";
+import React, { ReactElement, useState } from "react";
 import { questionsData } from "@base/questions-data";
 import RadioSet from "@components/RadioSet";
 import SelectSet from "@components/SelectSet";
-import { AnswerRecord, ButtonValue } from "types/types";
-import Button from "@components/button/Button";
+import { answerType, questionNames } from "types/types";
 import ContactForm from "@components/ContactForm";
-import { getAnswerRecord } from "@components/form/functions/getAnswerRecord";
+import PrevButton from "@components/buttons/PrevButton";
+import NextButton from "@components/buttons/NextButton";
 
 const Form = (): ReactElement => {
   //todo перенести функции колбэки в useCallback
   //todo prev button work - for it useEffect?
 
+  const [answersObj, setAnswer] = useState<Map<questionNames, string | string[] | null>>(new Map([
+    [questionNames.initiator, null],
+    [questionNames.cities, null],
+    [questionNames.currentEducation, null],
+    [questionNames.learningForm, null],
+    [questionNames.paidEducationAllowedType, null],
+    [questionNames.educationSpecialityType, null],
+    [questionNames.educationTargetType, null],
+    [questionNames.howManyToAdmission, null],
+    [questionNames.name, null],
+    [questionNames.phone, null],
+    [questionNames.email, null],
+  ]));
+
   const [step, setStep] = useState(1);
-  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
-  const [answersMap, setAnswersMap] = useState<Map<number, AnswerRecord>>(new Map<number, AnswerRecord>());
 
   const currentQuestion = questionsData[step - 1];
 
-  const handleRadioChange = (value: AnswerRecord) => {
-    setAnswersMap(answersMap.set(value.id, value));
+  const handleRadioChange = (newValue: string) => {
+    setAnswer(answersObj.set(currentQuestion.name, newValue));
     setStep(a => a + 1);
   };
 
   const handleSelectChange = (value: string[]) => {
-    setSelectedOptions(value);
-    //todo setButtonState(step, );??
-    //если значение уже заполнено, состояние кнопок не менять
+    setAnswer(answersObj.set(currentQuestion.name, value));
   };
 
-  const submitSelectedOptions = () => {
-    const answer = getAnswerRecord(currentQuestion.name, selectedOptions, currentQuestion.id);
-    setAnswersMap(answersMap.set(answer.id, answer));
+  const handleNextStep = () => {
     setStep(a => a + 1);
   };
+
+  const value = answersObj.get(currentQuestion.name);
 
   if (step === questionsData.length + 1) {
     return <ContactForm />;
@@ -51,26 +60,25 @@ const Form = (): ReactElement => {
                 <RadioSet question={currentQuestion}
                           changeCallback={handleRadioChange}
                           key={currentQuestion.id}
-                          value={answersMap.get(currentQuestion.id)?.value} />
+                          value={value || ''} />
               ) : currentQuestion.answerType === "select" ? (
                 <SelectSet question={currentQuestion}
                            changeCallback={handleSelectChange}
                            key={currentQuestion.id}
-                           value={answersMap.get(currentQuestion.id)?.value} />
+                           value={value || undefined} />
               ) : null
             }
             <div className="buttons">
-              <Button type={ButtonValue.prev} isThereCurrentValue={step > 1} buttonHandler={() => {
+              <PrevButton currentStep={step} buttonHandler={() => {
                 setStep(prev => prev - 1);
               }} />
-              <Button type={ButtonValue.next} isThereCurrentValue={true} buttonHandler={submitSelectedOptions} />
+              <NextButton isActive={value !== undefined} buttonHandler={handleNextStep} />
             </div>
           </div>
         </div>
       </div>
     );
-  }
-  ;
+  };
 };
 
 export default Form;
