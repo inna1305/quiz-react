@@ -1,62 +1,33 @@
-import React from "react";
-import { ReactElement } from "react";
+import React, { ReactElement, useState } from "react";
+import { questionsData } from "@base/questions-data";
+import Button from "@components/buttons/Button";
+import { ButtonValue } from "types/types";
 
 const ContactForm = (): ReactElement => {
+  const [contacts, setContact] = useState(['']);
+  const lastStep = questionsData.length + 1;
   return (
-    <>test</>
+    <div className="form">
+    <div className="form__container">
+      <div className="form__title-counter-container">
+        <h2 className="form__title">Ваша подборка готова! 🥳 Куда нам отправить её?</h2>
+        <div className="form__counter">Шаг {lastStep}/{lastStep}</div>
+      </div>
+      <fieldset className="fieldset">
+        {/*todo обработчики для инпутов*/}
+        <input name="name" type="text" className="fieldset__input-text" placeholder="Как вас зовут?" id="name" required />
+        <input name="phone" type="text" className="fieldset__input-text" pattern="^\\+?\\d{0,20}(\\(\\d{1,20}\\))?$" placeholder="Номер телефона" id="number" required/>
+        <input name="email" type="email" className="fieldset__input-text" placeholder="E-mail" id="email" required/>
+      </fieldset>
+      <Button innerText={ButtonValue.final} buttonHandler={() => {
+      }} isActive={true} />
+    </div>
+    </div>
   )
 }
 
 export default ContactForm;
 
-
-
-
-
-
-
-//const getContactForm = () => {
-//     const currentStep = Number(localStorage.getItem('step'));
-//
-//     const container = createElement('div', {class: 'form__container'});
-//
-//     const titleCounterContainer = createElement('div', {class: 'form__title-counter-container'});
-//     const title = createElement('h2', {class: 'form__title'}, 'Ваша подборка готова! 🥳 Куда нам отправить её?');
-//     const counter = createElement('div', {class: 'form__counter'}, `Шаг ${currentStep}/${questionsData.length + 1}`);
-//     titleCounterContainer.append(title, counter);
-//
-//     const fieldset = createElement('fieldset', {class: 'fieldset'});
-//
-//     const name = createElement('input', {
-//         name: 'name',
-//         type: 'text',
-//         placeholder: 'Как вас зовут?',
-//         class: 'fieldset__input-text',
-//         id: 'name',
-//         required: '',
-//     });
-//
-//     const number = createElement('input', {
-//         name: 'phone',
-//         type: 'text',
-//         placeholder: 'Номер телефона',
-//         pattern: '^\\+?\\d{0,20}(\\(\\d{1,20}\\))?$',
-//         class: 'fieldset__input-text',
-//         id: 'number',
-//         required: '',
-//     });
-//
-//     const email = createElement('input', {
-//         name: 'email',
-//         type: 'email',
-//         placeholder: 'E-mail',
-//         class: 'fieldset__input-text',
-//         id: 'email',
-//         required: '',
-//     })
-//
-//     fieldset.append(name, number, email);
-//
 //     const button = createElement('button', {class: 'button', type: 'submit'}, 'Отправить');
 //     button.addEventListener('click', (event) => {
 //             const values = [name.value, number.value, email.value];
@@ -69,7 +40,3 @@ export default ContactForm;
 //             }
 //         }
 //     );
-//
-//     container.append(titleCounterContainer, fieldset, button);
-//     return container;
-// }

@@ -2,7 +2,6 @@ import React, { ReactElement } from "react";
 import { RadioProps } from "types/types";
 
 const RadioSet = (props: RadioProps): ReactElement => {
-  //todo если нажать на нажатую пупку она тогглится при перезаходе(теряет значение) - проверено только наглядно
 
   const variants = Array.from(props.question.variants.keys());
 

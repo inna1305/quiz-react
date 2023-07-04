@@ -52,6 +52,11 @@ export interface SelectProps extends QuestionElementProps {
   changeCallback: SelectChooseHandler<string[]>
 }
 
+export interface ContactsFormProps {
+  step: number,
+
+}
+
 
 export interface IRequestBody {
   initiator: string | null,
