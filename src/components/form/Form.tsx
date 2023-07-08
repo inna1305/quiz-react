@@ -77,7 +77,6 @@ const Form = (): ReactElement => {
       </div>
     );
   }
-  ;
 };
 
 export default Form;
