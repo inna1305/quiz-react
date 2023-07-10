@@ -1,17 +1,19 @@
 import React, { ReactElement, useState } from "react";
 import { questionsData } from "@base/questions-data";
 import Button from "@components/buttons/Button";
-import { ButtonValue, questionNames } from "types/types";
+import { ButtonValue, ContactsFormProps, questionNames } from "types/types";
 
-const ContactForm = (): ReactElement => {
-  const [contacts, setContact] = useState<Map<questionNames, string | null>>(new Map([
-    [questionNames.name, null],
-    [questionNames.phone, null],
-    [questionNames.email, null]
-  ]));
+export interface ContactsStateRecord {
+  questionNames: questionNames,
+  value: string
+}
+
+const ContactForm = (props: ContactsFormProps): ReactElement => {
+  const [contacts, setContact] = useState<Array<ContactsStateRecord>>([]);
 
   const handleChange = (name: questionNames, newValue: string) => {
-    setContact(contacts.set(name, newValue));
+    const contactElement: ContactsStateRecord = { questionNames: name, value: newValue };
+    setContact((prevContacts) => [...prevContacts, contactElement]);
   };
 
   const lastStep = questionsData.length + 1;
@@ -26,26 +28,23 @@ const ContactForm = (): ReactElement => {
         </div>
         <fieldset className="fieldset">
           <input name="name" type="text" className="fieldset__input-text" placeholder="Как вас зовут?" id="name"
-                 defaultValue={contacts.get(questionNames.name) ?? ""}
                  required onChange={(event) => {
             handleChange(questionNames.name, event.target.value);
           }
           } />
           <input name="phone" type="text" className="fieldset__input-text" pattern="^\\+?\\d{0,20}(\\(\\d{1,20}\\))?$"
                  placeholder="Номер телефона" id="number" required
-                 defaultValue={contacts.get(questionNames.phone) ?? ""}
                  onChange={(event) => {
                    handleChange(questionNames.phone, event.target.value);
                  }}
           />
           <input name="email" type="email" className="fieldset__input-text" placeholder="E-mail" id="email" required
-                 defaultValue={contacts.get(questionNames.email) ?? ""}
                  onChange={(event) => {
                    handleChange(questionNames.email, event.target.value);
                  }} />
         </fieldset>
         <Button innerText={ButtonValue.final} buttonHandler={() => {
-
+          props.submitCallback(contacts);
         }} isActive={true} />
       </div>
     </div>

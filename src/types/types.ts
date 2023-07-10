@@ -1,4 +1,5 @@
 import { LearningForm } from "types/questionsTypes";
+import { ContactsStateRecord } from "@components/ContactForm";
 
 export enum questionNames {
   'initiator'= 'initiator',
@@ -26,6 +27,7 @@ export type QuestionSubmitHandler<T> = (data: T) => void;
 export type SelectChooseHandler<T> = (data: T) => void;
 export type ButtonHandler = () => void;
 export type answerType = "radio" | "select";
+export type SubmitCallback<T> = (data: T) => void;
 
 export interface ButtonProps {
   innerText: ButtonValue,
@@ -53,8 +55,7 @@ export interface SelectProps extends QuestionElementProps {
 }
 
 export interface ContactsFormProps {
-  step: number,
-
+  submitCallback: SubmitCallback<ContactsStateRecord[]>
 }
 
 

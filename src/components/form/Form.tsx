@@ -3,7 +3,7 @@ import { questionsData } from "@base/questions-data";
 import RadioSet from "@components/RadioSet";
 import SelectSet from "@components/SelectSet";
 import { ButtonValue, questionNames } from "types/types";
-import ContactForm from "@components/ContactForm";
+import ContactForm, { ContactsStateRecord } from "@components/ContactForm";
 import Button from "@components/buttons/Button";
 
 const Form = (): ReactElement => {
@@ -37,9 +37,15 @@ const Form = (): ReactElement => {
     setAnswer(answersObj.set(currentQuestion.name, value));
   };
 
+  const submitHandle = (contactsArray: ContactsStateRecord[]) => {
+    contactsArray.forEach(contact => {
+      setAnswer(answersObj.set(contact.questionNames, contact.value));
+    })
+  }
+
 
   if (step === questionsData.length + 1) {
-    return <ContactForm />;
+    return <ContactForm submitCallback={submitHandle}/>;
   } else {
     const value = answersObj.get(currentQuestion.name);
 
