@@ -2,17 +2,17 @@ import { LearningForm } from "types/questionsTypes";
 import { ContactsStateRecord } from "@components/ContactForm";
 
 export enum questionNames {
-  'initiator'= 'initiator',
-  'cities' = 'cities',
-  'currentEducation' = 'currentEducation',
-  'educationTargetType' = 'educationTargetType',
-  'learningForm' = 'learningForm',
-  'paidEducationAllowedType' = 'paidEducationAllowedType',
-  'educationSpecialityType' = 'educationSpecialityType',
-  'howManyToAdmission' = 'howManyToAdmission',
-  'name' = 'name',
-  'phone' = 'phone',
-  'email' = 'email',
+  "initiator" = "initiator",
+  "cities" = "cities",
+  "currentEducation" = "currentEducation",
+  "educationTargetType" = "educationTargetType",
+  "learningForm" = "learningForm",
+  "paidEducationAllowedType" = "paidEducationAllowedType",
+  "educationSpecialityType" = "educationSpecialityType",
+  "howManyToAdmission" = "howManyToAdmission",
+  "name" = "name",
+  "phone" = "phone",
+  "email" = "email",
 }
 
 
@@ -23,6 +23,7 @@ export interface Question {
   variants: Map<string, string>,
   id: number,
 }
+
 export type QuestionSubmitHandler<T> = (data: T) => void;
 export type SelectChooseHandler<T> = (data: T) => void;
 export type ButtonHandler = () => void;
@@ -46,16 +47,16 @@ export interface QuestionElementProps {
   value: string | string[] | undefined
 }
 
-export interface RadioProps extends QuestionElementProps{
-  changeCallback: QuestionSubmitHandler<string>
+export interface RadioProps extends QuestionElementProps {
+  changeCallback: QuestionSubmitHandler<string>;
 }
 
 export interface SelectProps extends QuestionElementProps {
-  changeCallback: SelectChooseHandler<string[]>
+  changeCallback: SelectChooseHandler<string[]>;
 }
 
 export interface ContactsFormProps {
-  submitCallback: SubmitCallback<ContactsStateRecord[]>
+  submitCallback: SubmitCallback<ContactsStateRecord[]>;
 }
 
 

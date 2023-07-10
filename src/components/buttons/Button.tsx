@@ -1,4 +1,4 @@
-import { ButtonProps} from "types/types";
+import { ButtonProps } from "types/types";
 import React, { ReactElement } from "react";
 
 const Button = (props: ButtonProps): ReactElement => {
@@ -7,6 +7,6 @@ const Button = (props: ButtonProps): ReactElement => {
     props.buttonHandler()}>
     <div>{props.innerText}</div>
   </button>);
-}
+};
 
 export default Button;

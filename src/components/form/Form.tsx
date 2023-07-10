@@ -40,12 +40,12 @@ const Form = (): ReactElement => {
   const submitHandle = (contactsArray: ContactsStateRecord[]) => {
     contactsArray.forEach(contact => {
       setAnswer(answersObj.set(contact.questionNames, contact.value));
-    })
-  }
+    });
+  };
 
 
   if (step === questionsData.length + 1) {
-    return <ContactForm submitCallback={submitHandle}/>;
+    return <ContactForm submitCallback={submitHandle} />;
   } else {
     const value = answersObj.get(currentQuestion.name);
 
