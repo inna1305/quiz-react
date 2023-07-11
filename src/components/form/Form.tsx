@@ -5,6 +5,7 @@ import SelectSet from "@components/SelectSet";
 import { ButtonValue, questionNames } from "types/types";
 import ContactForm, { ContactsStateRecord } from "@components/ContactForm";
 import Button from "@components/buttons/Button";
+import fetchData from "@components/form/functions/fetchData";
 
 const Form = (): ReactElement => {
   //todo перенести функции колбэки в useCallback
@@ -41,6 +42,7 @@ const Form = (): ReactElement => {
     contactsArray.forEach(contact => {
       setAnswer(answersObj.set(contact.questionNames, contact.value));
     });
+    fetchData(answersObj);
   };
 
 

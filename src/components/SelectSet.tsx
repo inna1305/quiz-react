@@ -11,7 +11,7 @@ const SelectSet = (props: SelectProps): ReactElement => {
   };
 
 
-  const variants = Array.from(props.question.variants.values());
+  const variants = Array.from(props.question.variants.keys());
   const arrVariantsElem = variants.map((variant, index) => {
 
     return React.createElement("option", {
@@ -19,7 +19,7 @@ const SelectSet = (props: SelectProps): ReactElement => {
       id: variant,
       value: variant,
       key: index
-    }, variant);
+    }, props.question.variants.get(variant));
   });
 
   return (
