@@ -2,13 +2,62 @@ import React, { ReactElement, useState } from "react";
 import { questionsData } from "@base/questions-data";
 import RadioSet from "@components/RadioSet";
 import SelectSet from "@components/SelectSet";
-import { ButtonValue, questionNames } from "types/types";
-import ContactForm, { ContactsStateRecord } from "@components/ContactForm";
+import { ButtonValue, ContactsStateRecord, IResponse, questionNames } from "types/types";
 import Button from "@components/buttons/Button";
-import fetchData from "@components/form/functions/fetchData";
+import ContactForm from "@components/ContactForm";
+
+const testObj: Map<questionNames, string | string[] | null> = new Map;
+const fetchData = ()=> {
+  const headers = new Headers();
+  headers.append("accept", "*/*");
+  headers.append("Content-Type", "application/json");
+  const obj = Object.fromEntries(testObj);
+
+  fetch("https://gothic-calling-389914.uc.r.appspot.com/surveys", {
+    method: "POST",
+    body: JSON.stringify(obj),
+    headers: headers
+  })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => {
+      console.log(error + "it's an error!");
+      throw error;
+    });
+
+  //const fetchData = () => {
+  //
+  //     const headers = new Headers();
+  //     headers.append('accept', '*/*');
+  //     headers.append('Content-Type', 'application/json');
+  //     const requestBody = getRequestBody();
+  //
+  //     fetch('https://gothic-calling-389914.uc.r.appspot.com/surveys', {
+  //         method: 'POST',
+  //         body: JSON.stringify(requestBody),
+  //         headers: headers
+  //     })
+  //         .then(response => {
+  //             return response.json();
+  //         }).then(data => {
+  //         const body = document.querySelector('body');
+  //         clearElement(body);
+  //         body.append(resultsPage(data));
+  //         resetForm();
+  //     })
+  //         .catch(error => {
+  //             console.log(error + 'it`s error!');
+  //         });
+  // }
+};
+
+export async function loader() {
+  const contacts = await fetchData();
+  return { contacts };
+}
 
 const Form = (): ReactElement => {
-  //todo перенести функции колбэки в useCallback
+  //todo перенести функции колбэки в useCallback (только внутри юзеффект или сложные функции)
   //todo prev button work - for it useEffect?
 
   const [answersObj, setAnswer] = useState<Map<questionNames, string | string[] | null>>(new Map([
@@ -42,8 +91,8 @@ const Form = (): ReactElement => {
     contactsArray.forEach(contact => {
       setAnswer(answersObj.set(contact.questionNames, contact.value));
     });
-    fetchData(answersObj);
   };
+
 
 
   if (step === questionsData.length + 1) {

@@ -1,8 +1,9 @@
 @import "base/normalize.css";
 @import "base/variables";
-@import "pages/mainPage/mainPage";
+@import "pages/quizPage/quiz";
 @import "components/buttons/button";
 @import "components/form/form";
+@import "pages/error-page";
 
 
 @font-face {

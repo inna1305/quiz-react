@@ -1,6 +1,3 @@
-import { LearningForm } from "types/questionsTypes";
-import { ContactsStateRecord } from "@components/ContactForm";
-
 export enum questionNames {
   "initiator" = "initiator",
   "cities" = "cities",
@@ -59,19 +56,27 @@ export interface ContactsFormProps {
   submitCallback: SubmitCallback<ContactsStateRecord[]>;
 }
 
-
-export interface IRequestBody {
-  initiator: string | null,
-  cities: string[] | null,
-  currentEducation: string | null,
-  educationTargetType: string | null,
-  learningForm: LearningForm | null,
-  paidEducationAllowedType: string | null,
-  educationSpecialityType: string[] | null,
-  howManyToAdmission: string | null,
-  name: string | null,
-  phone: string | null,
-  email: string | null
+export interface ContactsStateRecord {
+  questionNames: questionNames,
+  value: string
 }
 
+export interface IInstitute {
+  id: number,
+  title: string,
+  address: string,
+  institutionType: string,
+  specialities: string[]
+}
 
+export interface IResponse {
+  institutions: IInstitute[]
+}
+
+export interface IResultsPageProps {
+  data: IResponse
+}
+
+export interface DataContextProps {
+  fetchData: (answersObj: Map<questionNames, string | string[] | null>) => Promise<IResponse>;
+}

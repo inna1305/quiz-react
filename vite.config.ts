@@ -19,6 +19,7 @@ export default defineConfig({
       '@scss': resolve(__dirname, 'src/scss'),
       '@base': resolve(__dirname, 'src/base'),
       'types': resolve(__dirname, 'src/types'),
+      '@pages': resolve(__dirname, 'src/pages'),
     },
   },
 });

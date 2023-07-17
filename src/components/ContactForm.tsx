@@ -1,12 +1,8 @@
 import React, { ReactElement, useState } from "react";
 import { questionsData } from "@base/questions-data";
 import Button from "@components/buttons/Button";
-import { ButtonValue, ContactsFormProps, questionNames } from "types/types";
-
-export interface ContactsStateRecord {
-  questionNames: questionNames,
-  value: string
-}
+import { ButtonValue, ContactsFormProps, ContactsStateRecord, questionNames } from "types/types";
+import { Link } from "react-router-dom";
 
 const ContactForm = (props: ContactsFormProps): ReactElement => {
   const [contacts, setContact] = useState<Array<ContactsStateRecord>>([]);
@@ -17,7 +13,6 @@ const ContactForm = (props: ContactsFormProps): ReactElement => {
   };
 
   const lastStep = questionsData.length + 1;
-
 
   return (
     <div className="form">
@@ -43,25 +38,14 @@ const ContactForm = (props: ContactsFormProps): ReactElement => {
                    handleChange(questionNames.email, event.target.value);
                  }} />
         </fieldset>
+        <Link to={'/results'}>
         <Button innerText={ButtonValue.final} buttonHandler={() => {
           props.submitCallback(contacts);
         }} isActive={true} />
+        </Link>
       </div>
     </div>
   );
 };
 
 export default ContactForm;
-
-//     const button = createElement('button', {class: 'button', type: 'submit'}, 'Отправить');
-//     button.addEventListener('click', (event) => {
-//             const values = [name.value, number.value, email.value];
-//             const allInputsFilled = values.every(value => value.length > 0);
-//             if (allInputsFilled) {
-//                 event.preventDefault();
-//                 recordAnswersToLS();
-//                 showLoader();
-//                 setTimeout(fetchData, 1000);
-//             }
-//         }
-//     );
