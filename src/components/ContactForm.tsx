@@ -1,15 +1,19 @@
-import React, { ReactElement, useState } from "react";
+import React, { ReactElement, useContext, useState } from "react";
 import { questionsData } from "@base/questions-data";
 import Button from "@components/buttons/Button";
 import { ButtonValue, ContactsFormProps, ContactsStateRecord, questionNames } from "types/types";
 import { Link } from "react-router-dom";
+import { TestContext } from "@components/App";
 
 const ContactForm = (props: ContactsFormProps): ReactElement => {
   const [contacts, setContact] = useState<Array<ContactsStateRecord>>([]);
+  const testContext = useContext(TestContext);
+
 
   const handleChange = (name: questionNames, newValue: string) => {
     const contactElement: ContactsStateRecord = { questionNames: name, value: newValue };
     setContact((prevContacts) => [...prevContacts, contactElement]);
+    contacts.forEach(contact => testContext?.setAnswer(testContext?.answers.set(contact.questionNames, contact.value)));
   };
 
   const lastStep = questionsData.length + 1;

@@ -1,10 +1,11 @@
-import React, { ReactElement, useState } from "react";
+import React, { ReactElement, useContext, useState } from "react";
 import { questionsData } from "@base/questions-data";
 import RadioSet from "@components/RadioSet";
 import SelectSet from "@components/SelectSet";
 import { ButtonValue, ContactsStateRecord, IResponse, questionNames } from "types/types";
 import Button from "@components/buttons/Button";
 import ContactForm from "@components/ContactForm";
+import { TestContext } from "@components/App";
 
 const testObj: Map<questionNames, string | string[] | null> = new Map;
 const fetchData = ()=> {
@@ -24,31 +25,6 @@ const fetchData = ()=> {
       console.log(error + "it's an error!");
       throw error;
     });
-
-  //const fetchData = () => {
-  //
-  //     const headers = new Headers();
-  //     headers.append('accept', '*/*');
-  //     headers.append('Content-Type', 'application/json');
-  //     const requestBody = getRequestBody();
-  //
-  //     fetch('https://gothic-calling-389914.uc.r.appspot.com/surveys', {
-  //         method: 'POST',
-  //         body: JSON.stringify(requestBody),
-  //         headers: headers
-  //     })
-  //         .then(response => {
-  //             return response.json();
-  //         }).then(data => {
-  //         const body = document.querySelector('body');
-  //         clearElement(body);
-  //         body.append(resultsPage(data));
-  //         resetForm();
-  //     })
-  //         .catch(error => {
-  //             console.log(error + 'it`s error!');
-  //         });
-  // }
 };
 
 export async function loader() {
@@ -59,6 +35,7 @@ export async function loader() {
 const Form = (): ReactElement => {
   //todo перенести функции колбэки в useCallback (только внутри юзеффект или сложные функции)
   //todo prev button work - for it useEffect?
+  const testContext = useContext(TestContext);
 
   const [answersObj, setAnswer] = useState<Map<questionNames, string | string[] | null>>(new Map([
     [questionNames.initiator, null],
@@ -80,11 +57,14 @@ const Form = (): ReactElement => {
 
   const handleRadioChange = (newValue: string) => {
     setAnswer(answersObj.set(currentQuestion.name, newValue));
+    testContext?.setAnswer(answersObj.set(currentQuestion.name, newValue));
     setStep(a => a + 1);
+
   };
 
   const handleSelectChange = (value: string[]) => {
     setAnswer(answersObj.set(currentQuestion.name, value));
+    testContext?.setAnswer(answersObj.set(currentQuestion.name, value));
   };
 
   const submitHandle = (contactsArray: ContactsStateRecord[]) => {

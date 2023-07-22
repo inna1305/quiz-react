@@ -1,31 +1,29 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { loader as rootLoader } from '@components/form/Form'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { loader, loader as rootLoader } from "@components/form/Form";
 
 
-import './style.scss';
-import App from './components/App';
+import "./style.scss";
 import ResultsPage from "./pages/resultsPage";
-import Quiz from "./pages/quizPage/quiz";
 import { ErrorPage } from "./pages/errorPage";
+import App from "@components/App";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Quiz />,
+    element: <App />,
     errorElement: <ErrorPage />,
-  },
-  {
-    path: "/results",
-    element: <ResultsPage />,
-    loader: rootLoader,
+    children: [{
+      element: <ResultsPage />,
+      path: "/results",
+      loader: rootLoader
+    }]
   }
-
 ]);
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-    <React.StrictMode>
-      <RouterProvider router={router} />
-    </React.StrictMode>
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <React.StrictMode>
+    <RouterProvider router={router} />
+  </React.StrictMode>
 );

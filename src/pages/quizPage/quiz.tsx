@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { ReactElement } from "react";
 import Form from "@components/form/Form";
+import { TestContext } from "@components/App";
 
 const Quiz = (): ReactElement => {
+  const context = useContext(TestContext);
   return(
     <div className="container">
       <div className="about"><h1 className="about__title">Подберем ВУЗ мечты</h1><p

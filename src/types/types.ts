@@ -77,6 +77,3 @@ export interface IResultsPageProps {
   data: IResponse
 }
 
-export interface DataContextProps {
-  fetchData: (answersObj: Map<questionNames, string | string[] | null>) => Promise<IResponse>;
-}
