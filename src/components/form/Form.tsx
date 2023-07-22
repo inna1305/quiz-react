@@ -2,10 +2,10 @@ import React, { ReactElement, useContext, useState } from "react";
 import { questionsData } from "@base/questions-data";
 import RadioSet from "@components/RadioSet";
 import SelectSet from "@components/SelectSet";
-import { ButtonValue, ContactsStateRecord, IResponse, questionNames } from "types/types";
+import { ButtonValue, questionNames } from "types/types";
 import Button from "@components/buttons/Button";
 import ContactForm from "@components/ContactForm";
-import { TestContext } from "@components/App";
+import { AnswersContext } from "@components/App";
 
 const testObj: Map<questionNames, string | string[] | null> = new Map;
 const fetchData = ()=> {
@@ -35,50 +35,20 @@ export async function loader() {
 const Form = (): ReactElement => {
   //todo перенести функции колбэки в useCallback (только внутри юзеффект или сложные функции)
   //todo prev button work - for it useEffect?
-  const testContext = useContext(TestContext);
-
-  const [answersObj, setAnswer] = useState<Map<questionNames, string | string[] | null>>(new Map([
-    [questionNames.initiator, null],
-    [questionNames.cities, null],
-    [questionNames.currentEducation, null],
-    [questionNames.learningForm, null],
-    [questionNames.paidEducationAllowedType, null],
-    [questionNames.educationSpecialityType, null],
-    [questionNames.educationTargetType, null],
-    [questionNames.howManyToAdmission, null],
-    [questionNames.name, null],
-    [questionNames.phone, null],
-    [questionNames.email, null]
-  ]));
+  const answersContext = useContext(AnswersContext);
 
   const [step, setStep] = useState(1);
 
   const currentQuestion = questionsData[step - 1];
 
-  const handleRadioChange = (newValue: string) => {
-    setAnswer(answersObj.set(currentQuestion.name, newValue));
-    testContext?.setAnswer(answersObj.set(currentQuestion.name, newValue));
+  const handleRadioChange = () => {
     setStep(a => a + 1);
-
   };
-
-  const handleSelectChange = (value: string[]) => {
-    setAnswer(answersObj.set(currentQuestion.name, value));
-    testContext?.setAnswer(answersObj.set(currentQuestion.name, value));
-  };
-
-  const submitHandle = (contactsArray: ContactsStateRecord[]) => {
-    contactsArray.forEach(contact => {
-      setAnswer(answersObj.set(contact.questionNames, contact.value));
-    });
-  };
-
-
 
   if (step === questionsData.length + 1) {
-    return <ContactForm submitCallback={submitHandle} />;
+    return <ContactForm />;
   } else {
-    const value = answersObj.get(currentQuestion.name);
+    const value = answersContext?.answers.get(currentQuestion.name);
 
     return (
       <div className="form">
@@ -96,7 +66,6 @@ const Form = (): ReactElement => {
                           value={value || undefined} />
               ) : currentQuestion.answerType === "select" ? (
                 <SelectSet question={currentQuestion}
-                           changeCallback={handleSelectChange}
                            key={currentQuestion.id}
                            value={value || undefined} />
               ) : null

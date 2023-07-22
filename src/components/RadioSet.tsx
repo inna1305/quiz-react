@@ -1,7 +1,10 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useContext } from "react";
 import { RadioProps } from "types/types";
+import { AnswersContext } from "@components/App";
+
 
 const RadioSet = (props: RadioProps): ReactElement => {
+  const answersContext = useContext(AnswersContext);
 
   const variants = Array.from(props.question.variants.keys());
 
@@ -14,6 +17,7 @@ const RadioSet = (props: RadioProps): ReactElement => {
              checked={props.value !== undefined && props.value === variant}
              name="variant"
              onChange={() => {
+               answersContext?.setAnswer(answersContext?.answers.set(props.question.name, variant));
                props.changeCallback(variant);
              }}></input>
       <span className="fieldset__checkmark"></span>

@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { loader, loader as rootLoader } from "@components/form/Form";
+import { loader as rootLoader } from "@components/form/Form";
 
 
 import "./style.scss";

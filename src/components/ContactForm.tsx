@@ -1,20 +1,23 @@
 import React, { ReactElement, useContext, useState } from "react";
 import { questionsData } from "@base/questions-data";
 import Button from "@components/buttons/Button";
-import { ButtonValue, ContactsFormProps, ContactsStateRecord, questionNames } from "types/types";
+import { ButtonValue, ContactsStateRecord, questionNames } from "types/types";
 import { Link } from "react-router-dom";
-import { TestContext } from "@components/App";
+import { AnswersContext } from "@components/App";
 
-const ContactForm = (props: ContactsFormProps): ReactElement => {
+const ContactForm = (): ReactElement => {
   const [contacts, setContact] = useState<Array<ContactsStateRecord>>([]);
-  const testContext = useContext(TestContext);
+  const testContext = useContext(AnswersContext);
 
 
   const handleChange = (name: questionNames, newValue: string) => {
     const contactElement: ContactsStateRecord = { questionNames: name, value: newValue };
     setContact((prevContacts) => [...prevContacts, contactElement]);
-    contacts.forEach(contact => testContext?.setAnswer(testContext?.answers.set(contact.questionNames, contact.value)));
   };
+
+  const handleSubmit = () => {
+    contacts.forEach(contact => testContext?.setAnswer(testContext?.answers.set(contact.questionNames, contact.value)));
+  }
 
   const lastStep = questionsData.length + 1;
 
@@ -44,7 +47,7 @@ const ContactForm = (props: ContactsFormProps): ReactElement => {
         </fieldset>
         <Link to={'/results'}>
         <Button innerText={ButtonValue.final} buttonHandler={() => {
-          props.submitCallback(contacts);
+          handleSubmit();
         }} isActive={true} />
         </Link>
       </div>

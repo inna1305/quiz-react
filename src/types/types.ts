@@ -22,10 +22,8 @@ export interface Question {
 }
 
 export type QuestionSubmitHandler<T> = (data: T) => void;
-export type SelectChooseHandler<T> = (data: T) => void;
 export type ButtonHandler = () => void;
 export type answerType = "radio" | "select";
-export type SubmitCallback<T> = (data: T) => void;
 
 export interface ButtonProps {
   innerText: ButtonValue,
@@ -46,14 +44,6 @@ export interface QuestionElementProps {
 
 export interface RadioProps extends QuestionElementProps {
   changeCallback: QuestionSubmitHandler<string>;
-}
-
-export interface SelectProps extends QuestionElementProps {
-  changeCallback: SelectChooseHandler<string[]>;
-}
-
-export interface ContactsFormProps {
-  submitCallback: SubmitCallback<ContactsStateRecord[]>;
 }
 
 export interface ContactsStateRecord {

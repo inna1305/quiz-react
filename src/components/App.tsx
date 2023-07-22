@@ -7,7 +7,7 @@ interface IContext {
   setAnswer: Dispatch<SetStateAction<Map<questionNames, string | string[] | null>>>;
 }
 
-export const TestContext = createContext<IContext | null>(null);
+export const AnswersContext = createContext<IContext | null>(null);
 
 const App: React.FC = () => {
   //обработать ответ от сервера, результат передать в страницу результата как data
@@ -27,9 +27,9 @@ const App: React.FC = () => {
   const value: IContext = { answers: answersObj, setAnswer: setAnswer };
 
   return (
-    <TestContext.Provider value={value}>
+    <AnswersContext.Provider value={value}>
       <Quiz />
-    </TestContext.Provider>
+    </AnswersContext.Provider>
   );
 };
 

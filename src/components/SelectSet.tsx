@@ -1,13 +1,16 @@
-import React, { ReactElement, useState } from "react";
-import { SelectProps } from "types/types";
+import React, { ReactElement, useContext, useState } from "react";
+import { QuestionElementProps } from "types/types";
+import { AnswersContext } from "@components/App";
 
-const SelectSet = (props: SelectProps): ReactElement => {
+const SelectSet = (props: QuestionElementProps): ReactElement => {
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+  const answersContext = useContext(AnswersContext);
+
 
   const handleOptionsChoosing = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValues = Array.from(event.target.selectedOptions, (option) => option.value);
     setSelectedOptions(selectedValues);
-    props.changeCallback(selectedValues);
+    answersContext?.setAnswer(answersContext?.answers.set(props.question.name, selectedValues));
   };
 
 
