@@ -1,13 +1,16 @@
-import React, { createContext, Dispatch, SetStateAction, useState } from "react";
-import Quiz from "../pages/quizPage/quiz";
-import { questionNames } from "types/types";
+import React, { createContext, useState } from "react";
+import { IAnswersContext, IStepContext, questionNames } from "types/types";
+import Form from "@components/form/Form";
+import Decor from "@components/decor/Decor";
 
-interface IContext {
-  answers: Map<questionNames, string | string[] | null>,
-  setAnswer: Dispatch<SetStateAction<Map<questionNames, string | string[] | null>>>;
-}
+export const AnswersContext = createContext<IAnswersContext | null>(null);
 
-export const AnswersContext = createContext<IContext | null>(null);
+const initialStepContext: IStepContext = {
+  step: 0,
+  setStep: () => {
+  }
+};
+export const StepContext = createContext<IStepContext>(initialStepContext);
 
 const App: React.FC = () => {
   //обработать ответ от сервера, результат передать в страницу результата как data
@@ -24,12 +27,21 @@ const App: React.FC = () => {
     [questionNames.phone, null],
     [questionNames.email, null]
   ]));
-  const value: IContext = { answers: answersObj, setAnswer: setAnswer };
+
+  const [step, setStep] = useState(1);
+
+  const answersContextValue: IAnswersContext = { answers: answersObj, setAnswer: setAnswer };
+  const stepContextValue: IStepContext = { step: step, setStep: setStep };
 
   return (
-    <AnswersContext.Provider value={value}>
-      <Quiz />
-    </AnswersContext.Provider>
+    <StepContext.Provider value={stepContextValue}>
+      <AnswersContext.Provider value={answersContextValue}>
+        <div className="container">
+          <Decor />
+          <Form />
+        </div>
+      </AnswersContext.Provider>
+    </StepContext.Provider>
   );
 };
 

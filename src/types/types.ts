@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 export enum questionNames {
   "initiator" = "initiator",
   "cities" = "cities",
@@ -21,7 +23,16 @@ export interface Question {
   id: number,
 }
 
-export type QuestionSubmitHandler<T> = (data: T) => void;
+export interface IAnswersContext {
+  answers: Map<questionNames, string | string[] | null>,
+  setAnswer: Dispatch<SetStateAction<Map<questionNames, string | string[] | null>>>;
+}
+
+export interface IStepContext {
+  step: number,
+  setStep: Dispatch<SetStateAction<number>>
+}
+
 export type ButtonHandler = () => void;
 export type answerType = "radio" | "select";
 
@@ -42,9 +53,6 @@ export interface QuestionElementProps {
   value: string | string[] | undefined
 }
 
-export interface RadioProps extends QuestionElementProps {
-  changeCallback: QuestionSubmitHandler<string>;
-}
 
 export interface ContactsStateRecord {
   questionNames: questionNames,
