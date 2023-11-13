@@ -1,7 +1,4 @@
 # Quiz Application using React, TypeScript, and SCSS
-This project is a quiz application that gathers user responses, displaying the current step number within the survey and enabling forward and backward navigation, with answers persisting when navigating back.
-
-# Quiz Application using React, TypeScript, and SCSS
 
 This project is a quiz application that gathers user responses, displaying the current step number within the survey and enabling forward and backward navigation, with answers persisting when navigating back. 
 
