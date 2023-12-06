@@ -1,8 +1,8 @@
-import { ReactElement } from "react";
-import React from "react";
+import { ReactElement } from 'react';
+import React from 'react';
 
 const ResultsPage = (): ReactElement => {
-  return (<>results</>)
-}
+  return <>results</>;
+};
 
 export default ResultsPage;
