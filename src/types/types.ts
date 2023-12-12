@@ -1,5 +1,3 @@
-import { Dispatch, SetStateAction } from 'react';
-
 export enum questionNames {
   'initiator' = 'initiator',
   'cities' = 'cities',
@@ -20,16 +18,6 @@ export interface Question {
   answerType: answerType;
   variants: Map<string, string>;
   id: number;
-}
-
-export interface IAnswersContext {
-  answers: Map<questionNames, string | string[] | null>;
-  setAnswer: Dispatch<SetStateAction<Map<questionNames, string | string[] | null>>>;
-}
-
-export interface IStepContext {
-  step: number;
-  setStep: Dispatch<SetStateAction<number>>;
 }
 
 export type ButtonHandler = () => void;
@@ -71,4 +59,9 @@ export interface IResponse {
 
 export interface IResultsPageProps {
   data: IResponse;
+}
+
+export enum Action {
+  stepForward = 'step_forward',
+  stepBack = 'step_back',
 }

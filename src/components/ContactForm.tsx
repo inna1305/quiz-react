@@ -3,11 +3,11 @@ import { questionsData } from '@base/questions-data';
 import Button from '@components/buttons/Button';
 import { ButtonValue, ContactsStateRecord, questionNames } from 'types/types';
 import { Link } from 'react-router-dom';
-import { AnswersContext } from '@components/App';
+import { StepContext } from '@components/App/App';
 
 const ContactForm = (): ReactElement => {
   const [contacts, setContact] = useState<Array<ContactsStateRecord>>([]);
-  const testContext = useContext(AnswersContext);
+  const stepContext = useContext(StepContext);
 
   const handleChange = (name: questionNames, newValue: string) => {
     const contactElement: ContactsStateRecord = { questionNames: name, value: newValue };
@@ -15,8 +15,8 @@ const ContactForm = (): ReactElement => {
   };
 
   const handleSubmit = () => {
-    contacts.forEach((contact) =>
-      testContext?.setAnswer(testContext?.answers.set(contact.questionNames, contact.value))
+    contacts.forEach((contact) => {}
+      //testContext?.setAnswer(testContext?.answers.set(contact.questionNames, contact.value))
     );
   };
 

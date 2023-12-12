@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { loader as rootLoader } from '@components/form/Form';
+import { loader as rootLoader } from '@components/form/helpers';
 
 import './style.scss';
 import ResultsPage from './pages/resultsPage';
 import { ErrorPage } from './pages/errorPage';
-import App from '@components/App';
+import App from '@components/App/App';
 
 const router = createBrowserRouter([
   {
