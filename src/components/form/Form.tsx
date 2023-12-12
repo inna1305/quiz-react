@@ -2,7 +2,7 @@ import React, { ReactElement, useContext } from 'react';
 import { questionsData } from '@base/questions-data';
 import RadioSet from '@components/RadioSet';
 import SelectSet from '@components/SelectSet';
-import { ButtonValue } from 'types/types';
+import { Action, ButtonValue } from 'types/types';
 import Button from '@components/buttons/Button';
 import ContactForm from '@components/ContactForm';
 import { initialState, StepContext } from '@components/App/App';
@@ -50,7 +50,7 @@ const Form = (): ReactElement => {
                 innerText={ButtonValue.prev}
                 buttonHandler={() => {
                   dispatch({
-                    type: 'decremented_step',
+                    type: Action.stepBack,
                   });
                 }}
               />
@@ -58,7 +58,7 @@ const Form = (): ReactElement => {
                 isActive={value !== undefined}
                 innerText={ButtonValue.next}
                 buttonHandler={() => {
-                  dispatch({ type: 'incremented_step' });
+                  dispatch({ type: Action.stepForward });
                 }}
               />
             </div>

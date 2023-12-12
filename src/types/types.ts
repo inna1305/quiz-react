@@ -1,15 +1,15 @@
 export enum questionNames {
-  'initiator' = 'initiator',
-  'cities' = 'cities',
-  'currentEducation' = 'currentEducation',
-  'educationTargetType' = 'educationTargetType',
-  'learningForm' = 'learningForm',
-  'paidEducationAllowedType' = 'paidEducationAllowedType',
-  'educationSpecialityType' = 'educationSpecialityType',
-  'howManyToAdmission' = 'howManyToAdmission',
-  'name' = 'name',
-  'phone' = 'phone',
-  'email' = 'email',
+  initiator = 'initiator',
+  cities = 'cities',
+  currentEducation = 'currentEducation',
+  educationTargetType = 'educationTargetType',
+  learningForm = 'learningForm',
+  paidEducationAllowedType = 'paidEducationAllowedType',
+  educationSpecialityType = 'educationSpecialityType',
+  howManyToAdmission = 'howManyToAdmission',
+  name = 'name',
+  phone = 'phone',
+  email = 'email',
 }
 
 export interface Question {
